@@ -2,26 +2,35 @@ import React ,{useEffect, useState}from 'react'
 import Layout from '../../Components/Layout/Layout'
 import {useParams} from "react-router-dom"
 import classes from "./Results.module.css"
-import axios from "axios"
-import { productUrl } from '../../API/endPoints'
 import ProductCard from '../../Components/Product/ProductCard'
 import Loader from '../../Components/Loader/Loader'
 function Results() {
    const [result, setResult] = useState([]);
    const [isLoading,setisLoading] = useState(false)
-   const { categoryName } = useParams(); 
+   const { categoryName } = useParams();
+   // Removed API fetch for frontend-only app
    useEffect(()=>{
     setisLoading(true)
-     axios.get(`${productUrl}/products/category/${categoryName}`)
-       .then((res) => {
-         setResult(res.data);
-         setisLoading(false);
-         
-       })
-       .catch((err) => {
-         console.log(err);
-         setisLoading(false);
-       });
+    // Dummy products data
+    setResult([
+      {
+        id: 1,
+        title: "Sample Product 1",
+        price: 49.99,
+        image: "https://via.placeholder.com/300",
+        rating: 4.0,
+        category: categoryName
+      },
+      {
+        id: 2,
+        title: "Sample Product 2",
+        price: 79.99,
+        image: "https://via.placeholder.com/300",
+        rating: 4.5,
+        category: categoryName
+      }
+    ]);
+    setisLoading(false);
    },[])
   
   return (

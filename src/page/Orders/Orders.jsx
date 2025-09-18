@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../Components/Layout/Layout";
-import { db } from "../../utility/firebase";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import ProductCard from "../../Components/Product/ProductCard";
 import classes from "./orders.module.css";
@@ -9,24 +8,7 @@ function Orders() {
   console.log(user);
 
   const [orders, setorders] = useState([]);
-  useEffect(() => {
-    if (user) {
-      db.collection("users")
-        .doc(user.uid)
-        .collection("orders")
-        .orderBy("created", "desc")
-        .onSnapshot((snapshot) => {
-          setorders(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              data: doc.data(),
-            }))
-          );
-        });
-    } else {
-      setorders([]);
-    }
-  }, []);
+  
   return (
     <Layout>
       <br />

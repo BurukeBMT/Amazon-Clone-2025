@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import axios from "axios"
 import ProductCard from './ProductCard'
 import classes from "./product.module.css";
 import Loader from '../Loader/Loader';
@@ -8,14 +7,24 @@ function Product() {
     const [isLoading, setisLoading]= useState(false)
     useEffect(()=>{
       setisLoading(true)
-     axios.get("https://fakestoreapi.com/products").then((res)=>{
-        setProduct(res.data)
-        setisLoading(false)
-    
-     }).catch((err)=>{
-        console.log(err)
-        setisLoading(false)
-     })
+      // Removed API fetch for frontend-only app
+      setProduct([
+        {
+          id: 1,
+          title: "Sample Product 1",
+          price: 49.99,
+          image: "https://via.placeholder.com/300",
+          rating: 4.0,
+        },
+        {
+          id: 2,
+          title: "Sample Product 2",
+          price: 79.99,
+          image: "https://via.placeholder.com/300",
+          rating: 4.5,
+        }
+      ])
+      setisLoading(false)
     },[])
     
   return (

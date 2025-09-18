@@ -15,7 +15,7 @@ const CarouselEffect = () => {
        
       >
         {img.map((imglink, i) => {
-          return <img src={imglink} key={i} />;
+          return <img src={imglink} key={i} alt="" />;
         })}
       </Carousel>
       <div className={classes.hero_img}></div>

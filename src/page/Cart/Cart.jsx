@@ -4,13 +4,11 @@ import Layout from '../../Components/Layout/Layout'
 import { DataContext } from '../../Components/DataProvider/DataProvider'
 import ProductCard from '../../Components/Product/ProductCard'
 import CurrencyFormat from '../../Components/Product/CurrencyFormat/CurrencyFormat';
-import { Link } from 'react-router-dom';
 import classes from "./cart.module.css"
 import { Type } from '../../utility/actiontype';
-import { IoIosArrowDown } from "react-icons/io";import { IoIosArrowUp } from "react-icons/io";
 
 function Cart() {
- const [{basket,user},dispatch]=useContext(DataContext);
+ const [{basket},dispatch]=useContext(DataContext);
  const total=basket.reduce((amount,item)=>{
    return item.price*item.amount+amount
  },0)
@@ -38,7 +36,7 @@ const decrement =(id)=>{
           <h2>hello</h2>
           <h3>your shopping basket</h3>
           <hr />
-          {basket?.length == 0 ? (
+          {basket?.length === 0 ? (
             <p>opps No item in your cart</p>
           ) : (
             basket?.map((item,i) => {
@@ -55,14 +53,14 @@ const decrement =(id)=>{
                       className={classes.btn}
                       onClick={() => increment(item)}
                     >
-                      <IoIosArrowUp />
+                      <span>▲</span>
                     </button>
                     <span>{item.amount}</span>
                     <button
                       className={classes.btn}
                       onClick={() => decrement(item.id)}
                     >
-                      <IoIosArrowDown />
+                      <span>▼</span>
                     </button>
                   </div>
                 </section>
@@ -81,7 +79,7 @@ const decrement =(id)=>{
               <input type="checkbox" />
               <small>This order contain a gift</small>
             </span>
-            <Link to="/payment">continue to checkout</Link>
+            <a href="/payment">continue to checkout</a>
           </div>
         )}
       </section>
